@@ -12,6 +12,7 @@ tags:
   - webassembly
   - react
   - typescript
+class: bg-teal-50 dark:bg-teal-950/30
 ---
 
 ...

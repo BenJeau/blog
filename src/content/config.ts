@@ -12,6 +12,7 @@ export const collections = {
         coverAlt: z.string(),
         coverLink: z.string().url().optional(),
         tags: z.array(z.string()),
+        class: z.string().optional(),
       }),
   }),
 };

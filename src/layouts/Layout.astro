@@ -11,6 +11,7 @@ interface Props {
     link?: string;
   };
   slug?: string;
+  bodyClass?: string;
 }
 
 const { title, ...props } = Astro.props;
@@ -24,13 +25,13 @@ const { title, ...props } = Astro.props;
     <meta name="description" content="Benoît Jeaurond's blog" />
     <meta name="author" content="Benoît Jeaurond" />
     <link rel="icon" href="/images/favicon.png" />
-    <ViewTransitions fallback="swap" />
+    <ViewTransitions />
   </head>
-  <body class="container mx-auto px-4 py-8 lg:px-8 min-h-screen flex">
+  <body class={"px-4 py-8 lg:px-8 min-h-screen flex transition-colors " + props.bodyClass ?? ""}>
     <main
-      class="prose prose-stone mx-auto dark:prose-invert prose-img:rounded-md flex-1 flex flex-col"
+      class="container prose prose-stone mx-auto dark:prose-invert prose-img:rounded-md flex-1 flex flex-col"
     >
-      <nav class="flex justify-between gap-x-8 gap-y-2 flex-wrap mb-8 w-full">
+      <nav class="flex justify-between gap-x-8 gap-y-2 flex-wrap mb-8 w-full text-sm sm:text-base">
         <div class="flex gap-2">
           <a class="opacity-60" href="/">blog.jeaurond.dev</a>
           {"slug" in props ? "/ " + props.slug : ""}
@@ -56,14 +57,13 @@ const { title, ...props } = Astro.props;
           @BenJeau/blog
         </a>
       </nav>
-
       {
         props.image && (
           <a
             href={props.image.link ?? ""}
             rel="noopener noreferrer"
             target="_blank"
-            class="mb-8"
+            class="mb-8 hidden sm:block"
           >
             <Image src={props.image.src} alt={props.image.alt} 
             class="my-0" />

@@ -29,6 +29,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
     alt: entry.data.coverAlt,
     link: entry.data.coverLink,
   }}
+  bodyClass={entry.data.class}
 >
   <div
     class="flex gap-1 text-xs -mt-3 flex-wrap"
@@ -40,14 +41,13 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
       ))
     }
   </div>
-
-  <div class="flex justify-between items-center flex-wrap">
-    <p class="text-sm opacity-60">
+  <div class="flex justify-between items-center flex-wrap gap-x-2">
+    <p class="text-sm opacity-60 mb-0">
       Blog post published on <b transition:name={`date-${entry.slug}`}
         >{dayjs.utc(entry.data.date).format("MMMM D, YYYY")}</b
       >
     </p>
-    <p transition:name={`time-to-read-${entry.slug}`} class="text-sm font-bold">
+    <p transition:name={`time-to-read-${entry.slug}`} class="text-sm font-bold mb-0">
       {remarkPluginFrontmatter.minutesRead}
     </p>
   </div>

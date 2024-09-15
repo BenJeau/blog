@@ -24,8 +24,8 @@ const blogEntries = await getCollection("blogs");
       const { remarkPluginFrontmatter } = await entry.render();
       return (
         <>
-          <div class="flex justify-between items-center flex-wrap">
-            <p>
+          <div class="flex justify-between items-center flex-wrap gap-x-2">
+            <p class="m-0">
               <a
                 href={`/${entry.slug}`}
                 transition:name={`title-${entry.slug}`}
@@ -39,18 +39,17 @@ const blogEntries = await getCollection("blogs");
             </p>
             <p
               transition:name={`time-to-read-${entry.slug}`}
-              class="text-sm font-bold"
+              class="text-sm font-bold m-0"
             >
               {remarkPluginFrontmatter.minutesRead}
             </p>
           </div>
           <p
-            class="text-sm -mt-5"
+            class="text-sm mt-0"
             transition:name={`description-${entry.slug}`}
           >
             {entry.data.description}
           </p>
-
           <div
             class="flex gap-1 text-xs -mt-3 flex-wrap"
             transition:name={`tags-${entry.slug}`}
