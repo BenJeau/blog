@@ -57,7 +57,7 @@ const blogEntries = await getCollection("blogs");
               transition:name={`tags-${entry.slug}`}
             >
               {entry.data.tags.map((tag) => (
-                <span class="rounded-md bg-stone-800 px-2 py-1 text-white">
+                <span class="rounded-lg bg-black/80 px-2 py-1 text-white dark:bg-white/10">
                   {tag}
                 </span>
               ))}
