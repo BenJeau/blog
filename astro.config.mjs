@@ -12,4 +12,5 @@ export default defineConfig({
     remarkPlugins: [[remarkToc, { heading: "contents" }], remarkReadingTime],
     rehypePlugins: [rehypeAccessibleEmojis],
   },
+  prefetch: true,
 });
