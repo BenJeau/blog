@@ -1,18 +1,59 @@
 ---
-import { getCollection } from 'astro:content';
-// 1. Generate a new path for every collection entry
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blogs');
-  return blogEntries.map(entry => ({
+  const blogEntries = await getCollection("blogs");
+  return blogEntries.map((entry) => ({
     params: {
-      blog: entry.slug
+      blog: entry.slug,
     },
     props: { entry },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
-<h1>{entry.data.title}</h1>
-<Content />
+
+<Layout
+  title={entry.data.title}
+  slug={entry.slug}
+  image={{
+    src: entry.data.cover,
+    alt: entry.data.coverAlt,
+    link: entry.data.coverLink,
+  }}
+>
+  <div
+    class="flex gap-1 text-xs -mt-3 flex-wrap"
+    transition:name={`tags-${entry.slug}`}
+  >
+    {
+      entry.data.tags.map((tag) => (
+        <span class="bg-stone-800 text-white rounded-md px-2 py-1">{tag}</span>
+      ))
+    }
+  </div>
+
+  <div class="flex justify-between items-center flex-wrap">
+    <p class="text-sm opacity-60">
+      Blog post published on <b transition:name={`date-${entry.slug}`}
+        >{dayjs.utc(entry.data.date).format("MMMM D, YYYY")}</b
+      >
+    </p>
+    <p transition:name={`time-to-read-${entry.slug}`} class="text-sm font-bold">
+      {remarkPluginFrontmatter.minutesRead}
+    </p>
+  </div>
+  <p class="text-sm" transition:name={`description-${entry.slug}`}>
+    {entry.data.description}
+  </p>
+  {remarkPluginFrontmatter.toc}
+  <Content />
+</Layout>

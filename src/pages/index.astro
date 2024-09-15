@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+
+const blogEntries = await getCollection("blogs");
+---
+
+<Layout title="Blog">
+  Welcome to my blog! 👋 To know more about me, please check out my Portfolio
+  website <a
+    href="https://jeaurond.dev/en/"
+    rel="noopener noreferrer"
+    target="_blank">jeaurond.dev</a
+  >.
+
+  <h2>Latest blog posts</h2>
+  {
+    blogEntries.map(async (entry) => {
+      const { remarkPluginFrontmatter } = await entry.render();
+      return (
+        <>
+          <div class="flex justify-between items-center flex-wrap">
+            <p>
+              <a
+                href={`/${entry.slug}`}
+                transition:name={`title-${entry.slug}`}
+              >
+                {entry.data.title}
+              </a>{" "}
+              -{" "}
+              <i class="opacity-70" transition:name={`date-${entry.slug}`}>
+                {dayjs.utc(entry.data.date).format("MMMM D, YYYY")}
+              </i>
+            </p>
+            <p
+              transition:name={`time-to-read-${entry.slug}`}
+              class="text-sm font-bold"
+            >
+              {remarkPluginFrontmatter.minutesRead}
+            </p>
+          </div>
+          <p
+            class="text-sm -mt-5"
+            transition:name={`description-${entry.slug}`}
+          >
+            {entry.data.description}
+          </p>
+
+          <div
+            class="flex gap-1 text-xs -mt-3 flex-wrap"
+            transition:name={`tags-${entry.slug}`}
+          >
+            {entry.data.tags.map((tag) => (
+              <span class="bg-stone-800 text-white rounded-md px-2 py-1">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </>
+      );
+    })
+  }
+</Layout>
