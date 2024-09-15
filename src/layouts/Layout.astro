@@ -3,6 +3,8 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
 
+import { appear } from "../animation";
+
 interface Props {
   title: string;
   image?: {
@@ -25,7 +27,7 @@ const { title, ...props } = Astro.props;
     <meta name="description" content="Benoît Jeaurond's blog" />
     <meta name="author" content="Benoît Jeaurond" />
     <link rel="icon" href="/images/favicon.png" />
-    <ViewTransitions />
+    <ViewTransitions fallback="swap" />
   </head>
   <body
     class={"px-4 py-8 lg:px-8 min-h-screen transition-colors " +
@@ -69,6 +71,7 @@ const { title, ...props } = Astro.props;
             rel="noopener noreferrer"
             target="_blank"
             class="mb-8 hidden sm:block"
+            transition:animate={appear}
           >
             <Image src={props.image.src} alt={props.image.alt} class="my-0" />
           </a>
@@ -77,7 +80,7 @@ const { title, ...props } = Astro.props;
       <h1 transition:name={`title-${props.slug}`}>
         {title}
       </h1>
-      <article>
+      <article transition:animate={appear}>
         <slot />
       </article>
       <footer
@@ -93,3 +96,16 @@ const { title, ...props } = Astro.props;
     </main>
   </body>
 </html>
+
+<style is:global>
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
