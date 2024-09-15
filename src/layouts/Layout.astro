@@ -27,7 +27,7 @@ const { title, ...props } = Astro.props;
     <link rel="icon" href="/images/favicon.png" />
     <ViewTransitions />
   </head>
-  <body class={"px-4 py-8 lg:px-8 min-h-screen flex transition-colors " + props.bodyClass ?? ""}>
+  <body class={"px-4 py-8 lg:px-8 min-h-screen flex transition-colors " + props.bodyClass || ""}>
     <main
       class="container prose prose-stone mx-auto dark:prose-invert prose-img:rounded-md flex-1 flex flex-col"
     >
