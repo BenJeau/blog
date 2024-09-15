@@ -20,45 +20,50 @@ const blogEntries = await getCollection("blogs");
 
   <h2>Latest blog posts</h2>
   {
-    blogEntries.map(async (entry) => {
-      const { remarkPluginFrontmatter } = await entry.render();
-      return (
-        <>
-          <div class="flex flex-wrap items-center justify-between gap-x-2">
-            <p class="m-0">
-              <a
-                href={`/${entry.slug}`}
-                transition:name={`title-${entry.slug}`}
+    blogEntries
+      .filter((entry) => import.meta.env.DEV || !entry.data.isDraft)
+      .map(async (entry) => {
+        const { remarkPluginFrontmatter } = await entry.render();
+        return (
+          <>
+            <div class="flex flex-wrap items-center justify-between gap-x-2">
+              <p class="m-0">
+                <a
+                  href={`/${entry.slug}`}
+                  transition:name={`title-${entry.slug}`}
+                >
+                  {entry.data.title}
+                </a>{" "}
+                -{" "}
+                <i class="opacity-70" transition:name={`date-${entry.slug}`}>
+                  {dayjs.utc(entry.data.date).format("MMMM D, YYYY")}
+                </i>
+              </p>
+              <p
+                transition:name={`time-to-read-${entry.slug}`}
+                class="m-0 text-sm font-bold"
               >
-                {entry.data.title}
-              </a>{" "}
-              -{" "}
-              <i class="opacity-70" transition:name={`date-${entry.slug}`}>
-                {dayjs.utc(entry.data.date).format("MMMM D, YYYY")}
-              </i>
-            </p>
+                {remarkPluginFrontmatter.minutesRead}
+              </p>
+            </div>
             <p
-              transition:name={`time-to-read-${entry.slug}`}
-              class="m-0 text-sm font-bold"
+              class="mt-0 text-sm"
+              transition:name={`description-${entry.slug}`}
             >
-              {remarkPluginFrontmatter.minutesRead}
+              {entry.data.description}
             </p>
-          </div>
-          <p class="mt-0 text-sm" transition:name={`description-${entry.slug}`}>
-            {entry.data.description}
-          </p>
-          <div
-            class="-mt-3 flex flex-wrap gap-1 text-xs"
-            transition:name={`tags-${entry.slug}`}
-          >
-            {entry.data.tags.map((tag) => (
-              <span class="rounded-md bg-stone-800 px-2 py-1 text-white">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </>
-      );
-    })
+            <div
+              class="-mt-3 flex flex-wrap gap-1 text-xs"
+              transition:name={`tags-${entry.slug}`}
+            >
+              {entry.data.tags.map((tag) => (
+                <span class="rounded-md bg-stone-800 px-2 py-1 text-white">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </>
+        );
+      })
   }
 </Layout>

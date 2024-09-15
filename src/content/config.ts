@@ -13,6 +13,7 @@ export const collections = {
         coverLink: z.string().url().optional(),
         tags: z.array(z.string()),
         class: z.string().optional(),
+        isDraft: z.boolean().default(false),
       }),
   }),
 };
