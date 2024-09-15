@@ -28,11 +28,11 @@ const { title, ...props } = Astro.props;
     <ViewTransitions />
   </head>
   <body
-    class={"px-4 py-8 lg:px-8 min-h-screen flex transition-colors " +
+    class={"px-4 py-8 lg:px-8 min-h-screen transition-colors " +
       props.bodyClass || ""}
   >
     <main
-      class="container prose prose-stone mx-auto flex flex-1 flex-col dark:prose-invert prose-img:rounded-md"
+      class="container prose prose-stone mx-auto dark:prose-invert prose-img:rounded-xl prose-img:shadow-md"
     >
       <nav
         class="mb-8 flex w-full flex-wrap justify-between gap-x-8 gap-y-2 text-sm sm:text-base"
@@ -77,7 +77,7 @@ const { title, ...props } = Astro.props;
       <h1 transition:name={`title-${props.slug}`}>
         {title}
       </h1>
-      <article class="flex-1">
+      <article>
         <slot />
       </article>
       <footer
