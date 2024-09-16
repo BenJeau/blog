@@ -25,6 +25,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 
 <Layout
   title={entry.data.title}
+  description={entry.data.description}
   slug={entry.slug}
   image={{
     src: entry.data.cover,

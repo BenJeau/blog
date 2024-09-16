@@ -13,7 +13,6 @@ tags:
   - react
   - typescript
 class: bg-teal-50 dark:bg-teal-950/30
-isDraft: true
 ---
 
 ...
