@@ -2,7 +2,7 @@ import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 
-import { siteTitle, siteDescription } from "../content";
+import { siteTitle, siteDescription } from "@/content";
 
 export async function GET(context: APIContext) {
   const blogs = await getCollection("blogs");

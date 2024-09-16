@@ -2,9 +2,13 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
-import { appear } from "../animation";
-import { siteDescription, siteTitle } from "../content";
+import { appear } from "@/animation";
+import { siteDescription, siteTitle } from "@/content";
+
+dayjs.extend(utc);
 
 interface Props {
   title: string;

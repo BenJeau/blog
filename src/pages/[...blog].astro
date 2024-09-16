@@ -1,11 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 
-dayjs.extend(utc);
+import Layout from "@/layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blogs");
