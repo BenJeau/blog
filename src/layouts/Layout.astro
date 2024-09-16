@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
 
 import { appear } from "../animation";
+import { siteDescription, siteTitle } from "../content";
 
 interface Props {
   title: string;
@@ -18,40 +19,35 @@ interface Props {
 }
 
 const { title, ...props } = Astro.props;
+
+const description = props.description || siteDescription;
 ---
 
 <html lang="en" class="bg-white dark:bg-stone-950">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | Benoît Jeaurond's blog</title>
-    <meta
-      name="description"
-      content="A place for me to write about what interests me and what I'm learning."
-    />
+    <title>{title} | {siteTitle}</title>
+    <meta name="description" content={description} />
     <meta name="author" content="Benoît Jeaurond" />
     <link rel="icon" href="/images/favicon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Benoît Jeaurond's blog"
+      title={siteTitle}
       href={new URL("rss.xml", Astro.site)}
     />
     <link rel="canonical" href={Astro.url} />
-    {
-      Astro.url.pathname !== "/" && (
-        <meta property="og:image" content={new URL("og.png", Astro.url)} />
-      )
-    }
-    {
-      props.description && (
-        <meta property="og:description" content={props.description} />
-      )
-    }
+    <meta property="og:description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:type" content="article" />
+    <meta property="og:image" content={new URL("og.png", Astro.url)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="twitter:card" content="summary_large_image" />
     <ViewTransitions fallback="swap" />
   </head>
   <body

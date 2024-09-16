@@ -7,6 +7,7 @@ import remarkParse from "remark-parse";
 import satori from "satori";
 
 import { remarkReadingTime } from "./remark-reading-time.mjs";
+import { siteDescription, siteTitle } from "./content";
 
 const render = (
   title: string,
@@ -115,7 +116,7 @@ const render = (
                               fontFamily: "Open Sans Bold",
                               margin: 0,
                             },
-                            children: "Benoît Jeaurond's Blog",
+                            children: siteTitle,
                           },
                         },
                         {
@@ -190,8 +191,7 @@ const extractMarkdownInformation = async (pathname: string) => {
   if (pathname === "/" || pathname === "") {
     return {
       title: "Home",
-      description:
-        "A place for me to write about what interests me and what I'm learning.",
+      description: siteDescription,
     };
   }
 

@@ -2,12 +2,13 @@ import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 
+import { siteTitle, siteDescription } from "../content";
+
 export async function GET(context: APIContext) {
   const blogs = await getCollection("blogs");
   return rss({
-    title: "Benoît Jeaurond's blog",
-    description:
-      "A place for me to write about what interests me and what I'm learning.",
+    title: siteTitle,
+    description: siteDescription,
     site: context.site!,
     items: blogs.map((post) => ({
       title: post.data.title,
