@@ -53,12 +53,16 @@ const description = props.description || siteDescription;
       @keyframes appear {
         0% {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(10px);
         }
         100% {
           opacity: 1;
           transform: translateY(0);
         }
+      }
+
+      .animate-appear {
+        animation: appear 0.5s ease-in-out;
       }
     </style>
   </head>
@@ -121,7 +125,7 @@ const description = props.description || siteDescription;
       <h1 transition:name={`title-${props.slug}`}>
         {title}
       </h1>
-      <article transition:animate={appear}>
+      <article>
         <slot />
       </article>
       <footer class="mt-8 flex flex-col gap-1 text-sm" transition:name="footer">
@@ -176,5 +180,15 @@ const description = props.description || siteDescription;
         </div>
       </footer>
     </main>
+    <script is:inline>
+      function fadeInContent() {
+        const main = document.querySelector("main");
+        main.classList.add("animate-appear");
+      }
+
+      fadeInContent();
+
+      window.addEventListener("astro:before-swap", fadeInContent);
+    </script>
   </body>
 </html>
