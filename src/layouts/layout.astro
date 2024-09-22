@@ -115,10 +115,17 @@ const description = props.description || siteDescription;
             href={props.image.link ?? ""}
             rel="noopener noreferrer"
             target="_blank"
-            class="mb-8 hidden sm:block"
+            class="not-prose group relative mb-8"
             transition:animate={appear}
           >
-            <Image src={props.image.src} alt={props.image.alt} class="my-0" />
+            <Image
+              src={props.image.src}
+              alt={props.image.alt}
+              class="my-0 rounded-xl shadow-md transition-opacity group-hover:opacity-50"
+            />
+            <div class="absolute bottom-2 right-2 rounded bg-black px-2 py-1 text-xs italic group-hover:underline sm:bottom-5 sm:right-5 sm:text-sm">
+              {props.image.link}
+            </div>
           </a>
         )
       }
