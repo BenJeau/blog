@@ -111,22 +111,23 @@ const description = props.description || siteDescription;
       </nav>
       {
         props.image && (
-          <a
-            href={props.image.link ?? ""}
-            rel="noopener noreferrer"
-            target="_blank"
-            class="not-prose group relative"
-            transition:animate={appear}
-          >
-            <Image
-              src={props.image.src}
-              alt={props.image.alt}
-              class="my-0 rounded-xl shadow-md transition-opacity group-hover:opacity-50"
-            />
-            <div class="absolute bottom-2 right-2 rounded-md bg-white/90 px-2 py-1 text-xs font-semibold italic group-hover:underline sm:bottom-5 sm:right-5 dark:bg-black">
+          <div class="not-prose group relative">
+            <a
+              href={props.image.link ?? ""}
+              rel="noopener noreferrer"
+              target="_blank"
+              transition:animate={appear}
+            >
+              <Image
+                src={props.image.src}
+                alt={props.image.alt}
+                class="my-0 rounded-xl shadow-md transition-opacity group-hover:opacity-50"
+              />
+            </a>
+            <div class="absolute bottom-2 right-2 cursor-pointer rounded-md bg-white/90 px-2 py-1 text-xs font-semibold italic group-hover:underline sm:bottom-5 sm:right-5 dark:bg-black">
               {props.image.link}
             </div>
-          </a>
+          </div>
         )
       }
       <h1
