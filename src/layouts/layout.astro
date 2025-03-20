@@ -6,6 +6,8 @@ import { ViewTransitions } from "astro:transitions";
 import { appear } from "@/animation";
 import { siteDescription, siteTitle } from "@/content";
 
+import "@/styles/global.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -71,7 +73,7 @@ const description = props.description || siteDescription;
       props.bodyClass || ""}
   >
     <main
-      class="container prose prose-stone mx-auto dark:prose-invert prose-a:transition-opacity prose-a:duration-75 hover:prose-a:opacity-50 prose-img:rounded-xl prose-img:shadow-md"
+      class="prose prose-stone dark:prose-invert prose-a:transition-opacity prose-a:duration-75 prose-a:hover:opacity-50 prose-img:rounded-xl prose-img:shadow-md container mx-auto"
     >
       <nav
         class="mb-8 flex w-full flex-wrap justify-between gap-x-8 gap-y-2 text-sm sm:text-base"
@@ -124,7 +126,7 @@ const description = props.description || siteDescription;
                 class="my-0 rounded-xl shadow-md transition-opacity group-hover:opacity-50"
               />
             </a>
-            <div class="absolute bottom-2 right-2 cursor-pointer rounded-md bg-white/90 px-2 py-1 text-xs font-semibold italic group-hover:underline sm:bottom-5 sm:right-5 dark:bg-black">
+            <div class="absolute right-2 bottom-2 cursor-pointer rounded-md bg-white/90 px-2 py-1 text-xs font-semibold italic group-hover:underline sm:right-5 sm:bottom-5 dark:bg-black">
               {props.image.link}
             </div>
           </div>

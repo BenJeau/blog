@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
@@ -11,10 +11,13 @@ import { siteUrl } from "./src/content";
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
-  integrations: [tailwind(), sitemap(), og()],
+  integrations: [sitemap(), og()],
   markdown: {
     remarkPlugins: [[remarkToc, { heading: "contents" }], remarkReadingTime],
     rehypePlugins: [rehypeAccessibleEmojis],
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   prefetch: true,
 });
