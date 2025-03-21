@@ -6,11 +6,15 @@ import { siteTitle, siteDescription } from "@/content";
 
 export async function GET(context: APIContext) {
   const blogs = await getCollection("blogs");
+  const blogsSorted = blogs.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
+  const visibleBlogs = blogsSorted.filter((blog) => !blog.data.isDraft);
   return rss({
     title: siteTitle,
     description: siteDescription,
     site: context.site!,
-    items: blogs.map((post) => ({
+    items: visibleBlogs.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
