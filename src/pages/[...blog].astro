@@ -62,6 +62,5 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   <p class="text-sm" transition:name={`description-${entry.slug}`}>
     {entry.data.description}
   </p>
-  {remarkPluginFrontmatter.toc}
   <Content />
 </Layout>
