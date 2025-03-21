@@ -1,0 +1,21 @@
+---
+import { appear } from "@/animation";
+import { Image } from "astro:assets";
+
+type Props = {
+  dark: ImageMetadata;
+  light: ImageMetadata;
+  alt: string;
+};
+
+const { dark, light, alt } = Astro.props as Props;
+---
+
+<Image src={light} alt={alt} transition:animate={appear} class="dark:hidden" />
+
+<Image
+  src={dark}
+  alt={alt}
+  transition:animate={appear}
+  class="hidden dark:block"
+/>

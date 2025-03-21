@@ -16,6 +16,10 @@ class: bg-teal-50 dark:bg-teal-950/30
 isDraft: true
 ---
 
+import DynamicImage from "@/components/dynamic-image.astro";
+import developmentDark from "./development-dark.png";
+import developmentLight from "./development-light.png";
+
 ---
 
 ## Contents
@@ -24,7 +28,7 @@ isDraft: true
 
 I was inspired by some Twitch streamers to dive into the implementation of a programming language. It seems to be interesting to understand the inner workings of a programming language and how to go from a sequence of letters to a functioning program.
 
-The [Writing An Interprerter In Go](https://interpreterbook.com/) book was one that I had seen online and strongly recommended by some of the tech influencers online I follow, so I dediced to give it a try. And oh actually, I wrote it in Rust and not in Go. 
+The [Writing An Interprerter In Go](https://interpreterbook.com/) book was one that I had seen online and strongly recommended by some of the tech influencers online I follow, so I dediced to give it a try. And oh actually, I wrote it in Rust and not in Go.
 
 ### Why use Rust?
 
@@ -32,7 +36,7 @@ Throughout the book, all the examples and some concepts are related to the progr
 
 #### 1. Rust's core features
 
-Due to the nature of pattern matching, traits, and sum types, some of the concepts were  in Rust! Here are a few examples that I stumbled uppon within the book:
+Due to the nature of pattern matching, traits, and sum types, some of the concepts were in Rust! Here are a few examples that I stumbled uppon within the book:
 
 - hashing in Rust is pretty simple if you use derive macros - no need to create a custom hashing function (although for performance improvements, creating a custom one could help since any specific implemetation is better than a generalized implementation)
 - no need to have interfaces to implement for an token/expression/statement and no need for string constants representing a type. Rust's enum types are powerful to contain related data and to express exhaustiveness
@@ -63,7 +67,7 @@ Here's what the language supports (as pulled from their website):
 
 ```js
 // Integers & arithmetic expressions
-let version = 1 + (50 / 2) - (8 * 3);
+let version = 1 + 50 / 2 - 8 * 3;
 
 // ... and strings
 let name = "The Monkey programming language";
@@ -72,7 +76,10 @@ let name = "The Monkey programming language";
 let isMonkeyFastNow = true;
 
 // ... arrays & hash maps
-let people = [{"name": "Anna", "age": 24}, {"name": "Bob", "age": 99}];
+let people = [
+  { name: "Anna", age: 24 },
+  { name: "Bob", age: 99 },
+];
 ```
 
 You can create your own functions or use the built-in ones.
@@ -121,7 +128,11 @@ When I started reading the book, I created a new Rust project and started implem
 
 Since I'm one that likes to code in various spaces other than my desk, I like to make sure ... I had the following setup where I could read the book, view the output of the tests, and write code:
 
-![Computer setup](./development-dark.png)
+<DynamicImage
+  dark={developmentDark}
+  light={developmentLight}
+  alt="Computer setup"
+/>
 
 ### Testing
 

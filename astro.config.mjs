@@ -8,10 +8,12 @@ import { remarkReadingTime } from "./src/remark-reading-time.mjs";
 import { og } from "./src/astro/og-plugin";
 import { siteUrl } from "./src/content";
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
-  integrations: [sitemap(), og()],
+  integrations: [sitemap(), og(), mdx()],
   markdown: {
     remarkPlugins: [[remarkToc, { heading: "contents" }], remarkReadingTime],
     rehypePlugins: [rehypeAccessibleEmojis],
