@@ -6,16 +6,24 @@ type Props = {
   dark: ImageMetadata;
   light: ImageMetadata;
   alt: string;
+  noShadow?: boolean;
 };
 
-const { dark, light, alt } = Astro.props as Props;
+const { dark, light, alt, noShadow = false } = Astro.props as Props;
 ---
 
-<Image src={light} alt={alt} transition:animate={appear} class="dark:hidden" />
+<Image
+  src={light}
+  alt={alt}
+  transition:animate={appear}
+  class="dark:hidden"
+  style={noShadow ? "box-shadow: none;" : ""}
+/>
 
 <Image
   src={dark}
   alt={alt}
   transition:animate={appear}
   class="hidden dark:block"
+  style={noShadow ? "box-shadow: none;" : ""}
 />

@@ -13,12 +13,15 @@ tags:
   - react
   - typescript
 class: bg-teal-50 dark:bg-teal-950/30
-isDraft: true
 ---
 
 import DynamicImage from "@/components/dynamic-image.astro";
 import developmentDark from "./development-dark.png";
 import developmentLight from "./development-light.png";
+import playgroundDark from "./playground-dark.png";
+import playgroundLight from "./playground-light.png";
+import cliDark from "./cli-dark.png";
+import cliLight from "./cli-light.png";
 
 ---
 
@@ -126,15 +129,17 @@ When I started reading the book, I created a new Rust project and started implem
 
 ### Computer setup
 
-Since I'm one that likes to code in various spaces other than my desk, I like to make sure ... I had the following setup where I could read the book, view the output of the tests, and write code:
+I'm one that likes to code in various spaces other than my desk. I had the following setup where I could read the book, view the output of the tests, and write code:
 
 <DynamicImage
   dark={developmentDark}
   light={developmentLight}
-  alt="Computer setup"
+  alt="Personal computer setup for development"
 />
 
 ### Testing
+
+I followed the book's instructions to create tests and adapted them for Rust...
 
 ## Deployment
 
@@ -146,7 +151,42 @@ Since I'm one that likes to code in various spaces other than my desk, I like to
 
 ## End result
 
-### Playground
+### REPL CLI
+
+To test out the interpreter, I followed the book to create a simple REPL CLI tool to execute Monkey code. It is pretty basic and doesn't support everything that the Monkey language supports, but it is a good start.
+
+<DynamicImage
+  dark={cliDark}
+  light={cliLight}
+  alt="REPL CLI of the Monkey interpreter"
+  noShadow
+/>
+
+### Interpreter Playground
+
+I wanted it to be a bit more interactive so I created a small React app that uses the compiled WASM package from Rust. Its built with [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/) components.
+
+By default, it automatically runs the code you write in the playground. It allows you to view the:
+
+- code's output
+- lexical tokens
+- abstract syntax tree (AST)
+- parsed Monkey language code
+- errors
+
+The playground's editor is using [Monaco Editor](https://microsoft.github.io/monaco-editor/) which is a powerful editor built by Microsoft (basically VSCode's editor) and I've used a [custom syntax highlighter](https://raw.githubusercontent.com/BenJeau/monkey-interpreter/refs/heads/main/ui/src/lib/monaco-monkey-lang-definition.ts) to highlight the Monkey language.
+
+Lately I've been also embracing more and more browsers' features to simplify frontend applications. All of the code is represented in the URL so you can share the URL with others or save it as a bookmark.
+
+Here's a preview of the playground that is also available on [monkey-interpreter.jeaurond.dev](https://monkey-interpreter.jeaurond.dev):
+
+<DynamicImage
+  dark={playgroundDark}
+  light={playgroundLight}
+  alt="Web playground of the Monkey interpreter"
+/>
+
+If you don't know where to start with the Monkey language, there's a few examples at the top of the playground to get you started.
 
 ### Source code
 
