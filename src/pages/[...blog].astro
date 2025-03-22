@@ -48,9 +48,19 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   </div>
   <div class="flex flex-wrap items-center justify-between gap-x-2">
     <p class="mb-0 text-sm opacity-60">
-      Blog post published on <b transition:name={`date-${entry.slug}`}
+      Published on <b transition:name={`date-${entry.slug}`}
         >{dayjs.utc(entry.data.date).format("MMMM D, YYYY")}</b
       >
+      {
+        entry.data.updated && (
+          <>
+            <span class="text-sm">
+              - Updated on{" "}
+              <b>{dayjs.utc(entry.data.updated).format("MMMM D, YYYY")}</b>
+            </span>
+          </>
+        )
+      }
     </p>
     <p
       transition:name={`time-to-read-${entry.slug}`}

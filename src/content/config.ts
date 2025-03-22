@@ -8,6 +8,7 @@ export const collections = {
         title: z.string(),
         description: z.string(),
         date: z.date(),
+        updated: z.date().optional(),
         cover: image(),
         coverAlt: z.string(),
         coverLink: z.string().url().optional(),
