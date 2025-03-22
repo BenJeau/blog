@@ -26,7 +26,7 @@ export async function GET(context: APIContext) {
         length: 0,
         type: "image/png",
       },
-      customData: `<lastBuildDate>${post.data.updated.toUTCString()}</lastBuildDate>`,
+      customData: post.data.updated ? `<lastBuildDate>${post.data.updated.toUTCString()}</lastBuildDate>` : "",
     })),
     customData: "<language>en-us</language>",
   });

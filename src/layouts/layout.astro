@@ -1,7 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 import { appear } from "@/animation";
 import { siteDescription, siteTitle } from "@/content";
@@ -27,7 +27,7 @@ const description = props.description || siteDescription;
 
 <html lang="en" class="bg-white dark:bg-stone-950">
   <head>
-    <ViewTransitions fallback="swap" />
+    <ClientRouter fallback="swap" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} | {siteTitle}</title>
