@@ -27,11 +27,11 @@ import cliLight from "./cli-light.png";
 
 ## Contents
 
-## Writing an Interpreter in ~Go~ Rust
+## Writing an interpreter in ~Go~ Rust
 
 I was inspired by some Twitch streamers to dive into the implementation of a programming language. It seems to be interesting to understand the inner workings of a programming language and how to go from a sequence of letters to a functioning program.
 
-The [Writing An Interprerter In Go](https://interpreterbook.com/) book was one that I had seen online and strongly recommended by some of the tech influencers online I follow, so I dediced to give it a try. And oh actually, I wrote it in Rust and not in Go.
+The [Writing An Interpreter In Go](https://interpreterbook.com/) book was one that I had seen online and strongly recommended by some of the tech influencers online I follow, so I decided to give it a try. And oh, actually, I wrote it in Rust and not in Go.
 
 ### Why use Rust?
 
@@ -39,26 +39,26 @@ Throughout the book, all the examples and some concepts are related to the progr
 
 #### 1. Rust's core features
 
-Due to the nature of pattern matching, traits, and sum types, some of the concepts were in Rust! Here are a few examples that I stumbled uppon within the book:
+Due to the nature of pattern matching, traits, and sum types, some of the concepts were in Rust! Here are a few examples that I stumbled upon within the book:
 
-- hashing in Rust is pretty simple if you use derive macros - no need to create a custom hashing function (although for performance improvements, creating a custom one could help since any specific implemetation is better than a generalized implementation)
-- no need to have interfaces to implement for an token/expression/statement and no need for string constants representing a type. Rust's enum types are powerful to contain related data and to express exhaustiveness
+- hashing in Rust is pretty simple if you use derive macros - no need to create a custom hashing function (although for performance improvements, creating a custom one could help since any specific implementation is better than a generalized implementation)
+- no need to have interfaces to implement for a token/expression/statement and no need for string constants representing a type. Rust's enum types are powerful to contain related data and to express exhaustiveness
 
 #### 2. Not garbage collected
 
-Unlike Go, Rust doesn't have a garbage collector and yet doesn't leave you in charge of managing the memory. Rust depends on [RAII](https://doc.rust-lang.org/rust-by-example/scope/raii.html) (resource acquisition is initilization) to manage the memory of the variables using within a Rust program. In turn complicates Rust with its borrow checker and ownership system, but leaves you worry free of memory mismanagement errors while not having a garbage collector.
+Unlike Go, Rust doesn't have a garbage collector and yet doesn't leave you in charge of managing the memory. Rust depends on [RAII](https://doc.rust-lang.org/rust-by-example/scope/raii.html) (resource acquisition is initialization) to manage the memory of the variables used within a Rust program. In turn, it complicates Rust with its borrow checker and ownership system but leaves you worry-free of memory mismanagement errors while not having a garbage collector.
 
-This should result in a simpler binary output (one without a garbage collector) and allow the underlying compiler to optimize further the binary due to the strict lifetimes of the variables and explicit Rust types.
+This should result in a simpler binary output (one without a garbage collector) and allow the underlying compiler to further optimize the binary due to the strict lifetimes of the variables and explicit Rust types.
 
 #### 3. WASM support
 
-I knew I wanted to create an online playground to test out the features added to the interpreter. Rust can compile to [WASM](https://webassembly.org/) which makes this a great langauge as well to use, and I had compiled to WASM in the past with ease.
+I knew I wanted to create an online playground to test out the features added to the interpreter. Rust can compile to [WASM](https://webassembly.org/) which makes this a great language to use, and I had compiled to WASM in the past with ease.
 
-Thanks to [wasm-pack](https://github.com/rustwasm/wasm-pack) and [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen), I created an npm package [@benjeau/monkey-interpreter](https://www.npmjs.com/package/@benjeau/monkey-interpreter) (which is less than 200KB) which I can then use within my frontend React codebase! Not saying this isn't possible with Go, its just easy to do it in Rust.
+Thanks to [wasm-pack](https://github.com/rustwasm/wasm-pack) and [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen), I created an npm package [@benjeau/monkey-interpreter](https://www.npmjs.com/package/@benjeau/monkey-interpreter) (which is less than 200KB) which I can then use within my frontend React codebase! Not saying this isn't possible with Go, it's just easy to do it in Rust.
 
-#### 4. Test driven development
+#### 4. Test-driven development
 
-The std library of Rust has a great base for creating test cases, from verifying equality of structs (based on the [PartialEq](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) trait) to the verbosity of the test failures with optional message arguments. Adding [cargo-watch](https://github.com/watchexec/cargo-watch) on top of that, makes it as easy as possible to view in realtime as you make your changes to know if they are breaking other features you've added previously within the interpreter. Since the book did not make you depend on external libraries/crates, the compilation and the feedback loop from when you break a change to viewing it within the output of your tests is within the _couple of miliseconds_.
+The std library of Rust has a great base for creating test cases, from verifying equality of structs (based on the [PartialEq](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) trait) to the verbosity of the test failures with optional message arguments. Adding [cargo-watch](https://github.com/watchexec/cargo-watch) on top of that makes it as easy as possible to view in real-time as you make your changes to know if they are breaking other features you've added previously within the interpreter. Since the book did not make you depend on external libraries/crates, the compilation and the feedback loop from when you break a feature to viewing it within the output of your tests is within a _couple of milliseconds_.
 
 ### The Monkey language
 
@@ -97,7 +97,7 @@ getName(people[1]); // => "Bob"
 puts(len(people));  // prints: 2
 ```
 
-Everything is scoped and returning data from a function can be done multiple ways.
+Everything is scoped, and returning data from a function can be done multiple ways.
 
 ```js
 // Conditionals, implicit, explicit returns, and recursive functions
@@ -125,7 +125,7 @@ adder(8); // => 11
 
 ## Development
 
-When I started reading the book, I created a new Rust project and started implemeting the interpreter. Everything started with tests which led the implementation of the code.
+When I started reading the book, I created a new Rust project and started implementing the interpreter. Everything started with tests, which led the implementation of the code.
 
 ### Computer setup
 
@@ -139,17 +139,9 @@ I'm one that likes to code in various spaces other than my desk. I had the follo
 
 ### Testing
 
-I followed the book's instructions to create tests and adapted them for Rust...
+I followed the book's instructions to create tests and adapted them for Rust. Again, [cargo-watch](https://github.com/watchexec/cargo-watch) is a great tool to have when developing tests.
 
-## Deployment
-
-### Github Actions
-
-### Cloudflare Pages
-
-### npm
-
-## End result
+For the tests to be close in proximity to the code, the code itself is in the same file as the code implementation. This can for sure bloat the files, but it seems to be the de facto for Rust projects, and it started to grow on me at the end of the project.
 
 ### REPL CLI
 
@@ -164,7 +156,7 @@ To test out the interpreter, I followed the book to create a simple REPL CLI too
 
 ### Interpreter Playground
 
-I wanted it to be a bit more interactive so I created a small React app that uses the compiled WASM package from Rust. Its built with [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/) components.
+I wanted it to be a bit more interactive, so I created a small React app that uses the compiled WASM package from Rust. It's built with [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/) components.
 
 By default, it automatically runs the code you write in the playground. It allows you to view the:
 
@@ -174,9 +166,9 @@ By default, it automatically runs the code you write in the playground. It allow
 - parsed Monkey language code
 - errors
 
-The playground's editor is using [Monaco Editor](https://microsoft.github.io/monaco-editor/) which is a powerful editor built by Microsoft (basically VSCode's editor) and I've used a [custom syntax highlighter](https://raw.githubusercontent.com/BenJeau/monkey-interpreter/refs/heads/main/ui/src/lib/monaco-monkey-lang-definition.ts) to highlight the Monkey language.
+The playground's editor is using [Monaco Editor](https://microsoft.github.io/monaco-editor/), which is a powerful editor built by Microsoft (basically VSCode's editor) and I've used a [custom syntax highlighter](https://raw.githubusercontent.com/BenJeau/monkey-interpreter/refs/heads/main/ui/src/lib/monaco-monkey-lang-definition.ts) to highlight the Monkey language.
 
-Lately I've been also embracing more and more browsers' features to simplify frontend applications. All of the code is represented in the URL so you can share the URL with others or save it as a bookmark.
+Lately I've also been embracing more and more browsers' features to simplify frontend applications. All of the code is represented in the URL so you can share the URL with others or save it as a bookmark.
 
 Here's a preview of the playground that is also available on [monkey-interpreter.jeaurond.dev](https://monkey-interpreter.jeaurond.dev):
 
@@ -186,8 +178,43 @@ Here's a preview of the playground that is also available on [monkey-interpreter
   alt="Web playground of the Monkey interpreter"
 />
 
-If you don't know where to start with the Monkey language, there's a few examples at the top of the playground to get you started.
+If you don't know where to start with the Monkey language, there are a few examples at the top of the playground to get you started.
 
 ### Source code
 
 The entire source code for the interpreter and the playground is available on my Github - [@BenJeau/monkey-interpreter](https://github.com/BenJeau/monkey-interpreter).
+
+## Deployment
+
+I didn't want to manually build and create deployments for the npm package and the frontend, so most of it is automated.
+
+### npm
+
+The frontend WASM package is published to [npm](https://www.npmjs.com/) at [@benjeau/monkey-interpreter](https://www.npmjs.com/package/@benjeau/monkey-interpreter) and is available to install within any project. This helped with the deployment of the frontend.
+
+#### Github Actions
+
+To create a new release of the npm package, there's a single manual step to do, the one to trigger the Action workflow by specifying the type of semantic version to bump. It runs the:
+
+- linter
+- formatter
+- tests
+- auditing of crates/dependencies used
+- build of the WASM package
+
+Once that's done, it updates the version of the package in the `Cargo.toml` file, builds the WASM package, and publishes it to npm. Not too bad for a single manual step!
+
+### Cloudflare Pages
+
+The frontend is hosted on [Cloudflare Pages](https://pages.cloudflare.com/) with no need for a backend server. This wasn't the first time I used it, and it's the easiest way to host an SPA. The setup for it is not seen within Github Actions, but it builds and deploys the frontend within seconds on every push on the `main` branch.
+
+## Conclusion
+
+At the end of the book, I did learn more about the implementation of an interpreter in Rust. Many of the concepts were a refresher from my university days, but it was still a fun project to work on.
+
+I have a few main takeaways from this project:
+
+1. Creating an interpreter in Rust simplifies development. I found myself not needing to do many of the things that were shown in the book due to Rust's strictness in types and ownership.
+2. Testing allowed me to refactor the code multiple times and ensured that the code was correct and working as expected. I also found it easier to test than other projects, but that could be due to the nature of the project.
+3. While I did not rely on any crates/dependencies, I think if I would have used something similar to a parser combinator framework like [nom](https://github.com/rust-bakery/nom), the code would have been more concise and easier to understand.
+   - I had personally used **nom** for other projects, and I loved it. It does require a different way of thinking, as it combines the parser and the lexer into a single framework, but it usually results in a more concise codebase and less code overall.
