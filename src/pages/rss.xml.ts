@@ -17,7 +17,6 @@ export async function GET(context: APIContext) {
     items: visibleBlogs.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
-      lastBuildDate: post.data.updated,
       description: post.data.description,
       categories: post.data.tags,
       author: "Benoît Jeaurond",
@@ -27,7 +26,8 @@ export async function GET(context: APIContext) {
         length: 0,
         type: "image/png",
       },
+      customData: `<lastBuildDate>${post.data.updated.toUTCString()}</lastBuildDate>`,
     })),
-    customData: `<language>en-us</language>`,
+    customData: "<language>en-us</language>",
   });
 }
